@@ -62,6 +62,9 @@ layout: default
         data-pref="{{ ev.prefecture_slug }}"
         data-months="{{ ev.months | join: ',' }}"
         data-weekday="{{ ev.weekday | default: '不定' }}">
+      {% if ev.image_url and ev.image_url != "" %}
+      <img class="card-thumb" src="{{ ev.image_url }}" alt="{{ ev.title }}" loading="lazy" referrerpolicy="no-referrer">
+      {% endif %}
       <span class="pref-tag">{{ ev.prefecture }}</span>
       <h3><a href="{{ ev.url | relative_url }}">{{ ev.title }}</a></h3>
       <p class="freq">{{ ev.frequency_text | default: "開催頻度: 情報未確認" }}</p>

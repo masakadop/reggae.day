@@ -13,6 +13,18 @@
   {% if page.description or page.frequency_text %},
   "description": {{ page.description | default: page.frequency_text | strip_html | strip_newlines | jsonify }}
   {% endif %}
+  {% if page.image_url and page.image_url != "" %},
+  "image": {{ page.image_url | jsonify }}
+  {% endif %}
+  {% if page.organizer_name and page.organizer_name != "" %},
+  "organizer": {
+    "@type": "Organization",
+    "name": {{ page.organizer_name | jsonify }}
+    {% if page.organizer_url and page.organizer_url != "" %},
+    "url": {{ page.organizer_url | jsonify }}
+    {% endif %}
+  }
+  {% endif %}
   {% if venue %},
   "location": {
     "@type": "MusicVenue",

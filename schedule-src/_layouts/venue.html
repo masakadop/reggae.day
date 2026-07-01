@@ -8,6 +8,10 @@ layout: default
   <h1>{{ page.title }}</h1>
   <p class="pref-badge">{{ page.prefecture }}（{{ page.region }}地方）</p>
 
+  {% if page.image_url and page.image_url != "" %}
+  <img class="detail-thumb" src="{{ page.image_url }}" alt="{{ page.title }}" loading="lazy" referrerpolicy="no-referrer">
+  {% endif %}
+
   <dl class="detail-list">
     <dt>住所</dt>
     {% if page.address_uncertain == true %}
@@ -26,6 +30,17 @@ layout: default
     {% if page.telephone and page.telephone != "" %}
     <dt>電話番号</dt>
     <dd>{{ page.telephone }}</dd>
+    {% endif %}
+
+    {% if page.organizer_name and page.organizer_name != "" %}
+    <dt>運営</dt>
+    <dd>
+      {{ page.organizer_name }}
+      {% if page.organizer_url and page.organizer_url != "" %} — <a href="{{ page.organizer_url }}" rel="noopener" target="_blank">公式サイト</a>{% endif %}
+      {% if page.organizer_sns %}
+        {% for sns in page.organizer_sns %} / <a href="{{ sns }}" rel="noopener" target="_blank">SNS</a>{% endfor %}
+      {% endif %}
+    </dd>
     {% endif %}
   </dl>
 

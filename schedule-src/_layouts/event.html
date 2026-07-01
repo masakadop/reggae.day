@@ -9,6 +9,10 @@ layout: default
   <h1>{{ page.title }}</h1>
   <p class="pref-badge">{{ page.prefecture }}（{{ page.region }}地方）</p>
 
+  {% if page.image_url and page.image_url != "" %}
+  <img class="detail-thumb" src="{{ page.image_url }}" alt="{{ page.title }}" loading="lazy" referrerpolicy="no-referrer">
+  {% endif %}
+
   <dl class="detail-list">
     <dt>開催頻度</dt>
     <dd>{{ page.frequency_text | default: "情報未確認" }}</dd>
@@ -35,6 +39,17 @@ layout: default
     <dt>イベント公式サイト</dt>
     <dd><a href="{{ page.official_url }}" rel="noopener" target="_blank">{{ page.official_url }}</a></dd>
     {% endif %}
+
+    {% if page.organizer_name and page.organizer_name != "" %}
+    <dt>主催</dt>
+    <dd>
+      {{ page.organizer_name }}
+      {% if page.organizer_url and page.organizer_url != "" %} — <a href="{{ page.organizer_url }}" rel="noopener" target="_blank">公式サイト</a>{% endif %}
+      {% if page.organizer_sns %}
+        {% for sns in page.organizer_sns %} / <a href="{{ sns }}" rel="noopener" target="_blank">SNS</a>{% endfor %}
+      {% endif %}
+    </dd>
+    {% endif %}
   </dl>
 
   {% if page.description %}
@@ -42,6 +57,18 @@ layout: default
   {% endif %}
 
   {{ content }}
+
+  {% if page.past_events and page.past_events.size > 0 %}
+  <h2>過去の開催履歴</h2>
+  <ul class="history-list">
+    {% for pe in page.past_events %}
+    <li>
+      <strong>{{ pe.year }}年</strong>{% if pe.date %}（{{ pe.date }}）{% endif %}: {{ pe.note }}
+      {% if pe.source %} <a href="{{ pe.source }}" rel="noopener" target="_blank">[出典]</a>{% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
 
   {% if page.sources and page.sources.size > 0 %}
   <h2>情報源</h2>
