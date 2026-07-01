@@ -1,0 +1,6 @@
+schedule-src/_site/
+schedule-src/.jekyll-cache/
+schedule-src/.sass-cache/
+schedule-src/.bundle/
+schedule-src/vendor/
+schedule-src/Gemfile.lock

@@ -1,0 +1,34 @@
+{% assign venue = site.venues | where: "slug", page.venue_slug | first %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MusicEvent",
+  "name": {{ page.name | default: page.title | jsonify }}
+  {% if page.official_url and page.official_url != "" %},
+  "url": {{ page.official_url | jsonify }}
+  {% endif %}
+  {% if page.next_date and page.next_date != "" %},
+  "startDate": {{ page.next_date | jsonify }}
+  {% endif %}
+  {% if page.description or page.frequency_text %},
+  "description": {{ page.description | default: page.frequency_text | strip_html | strip_newlines | jsonify }}
+  {% endif %}
+  {% if venue %},
+  "location": {
+    "@type": "MusicVenue",
+    "name": {{ venue.name | default: venue.title | jsonify }}
+    {% if venue.official_url and venue.official_url != "" %},
+    "url": {{ venue.official_url | jsonify }}
+    {% endif %}
+    {% if venue.address and venue.address_uncertain != true %},
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "JP",
+      "addressRegion": {{ venue.prefecture | jsonify }},
+      "streetAddress": {{ venue.address | jsonify }}
+    }
+    {% endif %}
+  }
+  {% endif %}
+}
+</script>

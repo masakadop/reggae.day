@@ -1,0 +1,45 @@
+name: Build reggae schedule pages
+
+on:
+  push:
+    paths:
+      - "schedule-src/**"
+      - ".github/workflows/schedule-pages.yml"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: schedule-pages-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+          bundler-cache: true
+          working-directory: schedule-src
+
+      - name: Build Jekyll site
+        working-directory: schedule-src
+        run: bundle exec jekyll build -d ../docs/schedule
+
+      - name: Commit and push generated site
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/schedule
+          if git diff --cached --quiet; then
+            echo "No changes in docs/schedule, skipping commit."
+          else
+            git commit -m "chore: rebuild schedule pages [skip ci-src]"
+            git push origin HEAD:${{ github.ref_name }}
+          fi

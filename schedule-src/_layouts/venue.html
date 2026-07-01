@@ -1,0 +1,56 @@
+---
+layout: default
+---
+{% include jsonld-venue.html %}
+
+<article class="detail-page venue-page">
+  <p class="breadcrumb"><a href="{{ '/' | relative_url }}">スケジュール一覧</a> &rsaquo; 会場</p>
+  <h1>{{ page.title }}</h1>
+  <p class="pref-badge">{{ page.prefecture }}（{{ page.region }}地方）</p>
+
+  <dl class="detail-list">
+    <dt>住所</dt>
+    {% if page.address_uncertain == true %}
+    <dd class="uncertain">住所不定・非公開{% if page.address_note %} — {{ page.address_note }}{% endif %}</dd>
+    {% elsif page.address %}
+    <dd>{{ page.address }}</dd>
+    {% else %}
+    <dd class="uncertain">情報未確認</dd>
+    {% endif %}
+
+    {% if page.official_url and page.official_url != "" %}
+    <dt>公式サイト</dt>
+    <dd><a href="{{ page.official_url }}" rel="noopener" target="_blank">{{ page.official_url }}</a></dd>
+    {% endif %}
+
+    {% if page.telephone and page.telephone != "" %}
+    <dt>電話番号</dt>
+    <dd>{{ page.telephone }}</dd>
+    {% endif %}
+  </dl>
+
+  {% if page.description %}
+  <div class="description">{{ page.description | markdownify }}</div>
+  {% endif %}
+
+  {{ content }}
+
+  {% assign related_events = site.events | where: "venue_slug", page.slug %}
+  {% if related_events.size > 0 %}
+  <h2>この会場で開催されるイベント</h2>
+  <ul class="related-list">
+    {% for ev in related_events %}
+    <li><a href="{{ ev.url | relative_url }}">{{ ev.title }}</a>（{{ ev.frequency_text }}）</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+
+  {% if page.sources and page.sources.size > 0 %}
+  <h2>情報源</h2>
+  <ul class="sources-list">
+    {% for src in page.sources %}
+    <li><a href="{{ src }}" rel="noopener" target="_blank">{{ src }}</a></li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</article>

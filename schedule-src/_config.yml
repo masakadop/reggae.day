@@ -1,0 +1,45 @@
+title: レゲエイベント・スケジュール
+description: 日本全国で定期開催されるレゲエミュージックイベント・会場の情報
+lang: ja
+url: "https://reggae.day"
+baseurl: "/schedule"
+
+collections:
+  venues:
+    output: true
+    permalink: /venues/:slug/
+  events:
+    output: true
+    permalink: /events/:slug/
+
+defaults:
+  - scope:
+      path: ""
+      type: venues
+    values:
+      layout: venue
+  - scope:
+      path: ""
+      type: events
+    values:
+      layout: event
+  - scope:
+      path: ""
+    values:
+      layout: default
+
+markdown: kramdown
+kramdown:
+  input: GFM
+
+plugins: []
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - README.md
+  - node_modules
+
+sass:
+  style: compressed

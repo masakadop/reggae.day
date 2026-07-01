@@ -1,0 +1,54 @@
+---
+layout: default
+---
+{% include jsonld-event.html %}
+{% assign venue = site.venues | where: "slug", page.venue_slug | first %}
+
+<article class="detail-page event-page">
+  <p class="breadcrumb"><a href="{{ '/' | relative_url }}">スケジュール一覧</a> &rsaquo; イベント</p>
+  <h1>{{ page.title }}</h1>
+  <p class="pref-badge">{{ page.prefecture }}（{{ page.region }}地方）</p>
+
+  <dl class="detail-list">
+    <dt>開催頻度</dt>
+    <dd>{{ page.frequency_text | default: "情報未確認" }}</dd>
+
+    {% if page.month_note and page.month_note != "" %}
+    <dt>開催時期</dt>
+    <dd class="uncertain">{{ page.month_note }}</dd>
+    {% endif %}
+
+    {% if page.next_date and page.next_date != "" %}
+    <dt>次回開催日</dt>
+    <dd>{{ page.next_date }}</dd>
+    {% else %}
+    <dt>次回開催日</dt>
+    <dd class="uncertain">情報未確認（各公式サイトでご確認ください）</dd>
+    {% endif %}
+
+    {% if venue %}
+    <dt>会場</dt>
+    <dd><a href="{{ venue.url | relative_url }}">{{ venue.title }}</a></dd>
+    {% endif %}
+
+    {% if page.official_url and page.official_url != "" %}
+    <dt>イベント公式サイト</dt>
+    <dd><a href="{{ page.official_url }}" rel="noopener" target="_blank">{{ page.official_url }}</a></dd>
+    {% endif %}
+  </dl>
+
+  {% if page.description %}
+  <div class="description">{{ page.description | markdownify }}</div>
+  {% endif %}
+
+  {{ content }}
+
+  {% if page.sources and page.sources.size > 0 %}
+  <h2>情報源</h2>
+  <ul class="sources-list">
+    {% for src in page.sources %}
+    <li><a href="{{ src }}" rel="noopener" target="_blank">{{ src }}</a></li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</article>
