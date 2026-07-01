@@ -1,0 +1,81 @@
+---
+layout: default
+---
+<section class="schedule-page">
+  <h1>{{ page.title | default: site.title }}</h1>
+  {{ content }}
+
+  <form id="filter-form" class="filters">
+    <div class="filter-field">
+      <label for="f-region">地方</label>
+      <select id="f-region">
+        <option value="">すべて</option>
+        {% assign regions = site.data.prefectures | map: "region" | uniq %}
+        {% for r in regions %}
+        <option value="{{ r }}">{{ r }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="filter-field">
+      <label for="f-pref">都道府県</label>
+      <select id="f-pref">
+        <option value="">すべて</option>
+        {% for p in site.data.prefectures %}
+        <option value="{{ p.slug }}" data-region="{{ p.region }}">{{ p.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="filter-field">
+      <label for="f-month">開催月</label>
+      <select id="f-month">
+        <option value="">すべて</option>
+        {% for m in (1..12) %}
+        <option value="{{ m }}">{{ m }}月</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="filter-field">
+      <label for="f-weekday">開催曜日</label>
+      <select id="f-weekday">
+        <option value="">すべて</option>
+        {% assign weekdays = "月,火,水,木,金,土,日,不定" | split: "," %}
+        {% for w in weekdays %}
+        <option value="{{ w }}">{{ w }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <button type="button" id="f-reset">条件クリア</button>
+  </form>
+
+  <p id="result-count" class="result-count"></p>
+
+  <ul id="event-list" class="event-list">
+    {% assign sorted_events = site.events | sort: "prefecture_slug" %}
+    {% for ev in sorted_events %}
+    {% assign venue = site.venues | where: "slug", ev.venue_slug | first %}
+    <li class="event-card"
+        data-region="{{ ev.region }}"
+        data-pref="{{ ev.prefecture_slug }}"
+        data-months="{{ ev.months | join: ',' }}"
+        data-weekday="{{ ev.weekday | default: '不定' }}">
+      <span class="pref-tag">{{ ev.prefecture }}</span>
+      <h3><a href="{{ ev.url | relative_url }}">{{ ev.title }}</a></h3>
+      <p class="freq">{{ ev.frequency_text | default: "開催頻度: 情報未確認" }}</p>
+      {% if venue %}
+      <p class="venue-link">会場: <a href="{{ venue.url | relative_url }}">{{ venue.title }}</a></p>
+      {% endif %}
+      {% if ev.next_date and ev.next_date != "" %}
+      <p class="next-date">次回開催日: {{ ev.next_date }}</p>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+
+  <p class="no-result-msg" id="no-result-msg" hidden>条件に一致するイベントが見つかりませんでした。</p>
+</section>
+
+<script src="{{ '/assets/schedule.js' | relative_url }}"></script>

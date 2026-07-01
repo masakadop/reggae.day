@@ -1,0 +1,31 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MusicVenue",
+  "name": {{ page.name | default: page.title | jsonify }}
+  {% if page.official_url and page.official_url != "" %},
+  "url": {{ page.official_url | jsonify }}
+  {% endif %}
+  {% if page.telephone and page.telephone != "" %},
+  "telephone": {{ page.telephone | jsonify }}
+  {% endif %}
+  {% if page.geo_lat and page.geo_lng %},
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": {{ page.geo_lat | jsonify }},
+    "longitude": {{ page.geo_lng | jsonify }}
+  }
+  {% endif %}
+  {% if page.address and page.address_uncertain != true %},
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "JP",
+    "addressRegion": {{ page.prefecture | jsonify }},
+    "streetAddress": {{ page.address | jsonify }}
+  }
+  {% endif %}
+  {% if page.description %},
+  "description": {{ page.description | strip_html | strip_newlines | jsonify }}
+  {% endif %}
+}
+</script>
