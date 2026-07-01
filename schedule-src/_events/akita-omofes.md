@@ -11,6 +11,7 @@ months: [7]
 weekday: "月"
 next_date: "2026-07-20"
 official_url: "https://www.omofes.jp/"
+image_url: "https://www.omofes.jp/2026/omofes2026.jpg"
 sources:
   - "https://www.ragnet.co.jp/reggae-festival"
   - "https://www.omofes.jp/"

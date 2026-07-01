@@ -11,6 +11,14 @@ months: [10]
 weekday: "日"
 next_date: "2026-10-04"
 official_url: "https://shibuyareggaesai.com/2026/"
+organizer_name: "SPICY CHOCOLATE"
+past_events:
+  - year: 2009
+    note: "SPICY CHOCOLATEがスタート"
+    source: "https://www.ragnet.co.jp/reggae-festival"
+  - year: 2026
+    note: "2026年で19回目"
+    source: "https://www.ragnet.co.jp/reggae-festival"
 sources:
   - "https://www.ragnet.co.jp/reggae-festival"
   - "https://shibuyareggaesai.com/2026/"

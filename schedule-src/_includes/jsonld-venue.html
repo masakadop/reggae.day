@@ -27,5 +27,8 @@
   {% if page.description %},
   "description": {{ page.description | strip_html | strip_newlines | jsonify }}
   {% endif %}
+  {% if page.image_url and page.image_url != "" %},
+  "image": {{ page.image_url | jsonify }}
+  {% endif %}
 }
 </script>

@@ -11,6 +11,7 @@ months: [7]
 weekday: "土"
 next_date: "2026-07-25"
 official_url: "https://camp-fire.jp/projects/953745/view"
+image_url: "https://static.camp-fire.jp/uploads/project_version/image/1600834/3b1df8d4-0a0c-4243-bc83-e63e664a51e0.jpeg?auto=format&fit=fill&ref=projects_overview&w=1200&h=675&fill=blur"
 sources:
   - "https://www.ragnet.co.jp/reggae-festival"
   - "https://camp-fire.jp/projects/953745/view"

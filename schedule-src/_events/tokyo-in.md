@@ -11,6 +11,7 @@ months: [6]
 weekday: "土"
 next_date: "2026-06-20"
 official_url: "https://www.jamafes.com/"
+image_url: "https://static.wixstatic.com/media/6f23f8_bf6b6ee1633e45afb28ee68bae66010b~mv2.png/v1/fit/w_2500,h_1330,al_c/6f23f8_bf6b6ee1633e45afb28ee68bae66010b~mv2.png"
 sources:
   - "https://www.ragnet.co.jp/reggae-festival"
   - "https://www.jamafes.com/"

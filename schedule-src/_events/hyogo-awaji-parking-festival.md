@@ -11,6 +11,7 @@ months: [4]
 weekday: "土"
 next_date: "2026-04-18"
 official_url: "https://parkingawaji.peatix.com/"
+image_url: "https://cdn.peatix.com/event/4869876/cover-yeLWvInQgm33lgZDrzbFVG9GOc6v6ZX5.png"
 sources:
   - "https://www.ragnet.co.jp/reggae-festival"
   - "https://parkingawaji.peatix.com/"

@@ -11,6 +11,7 @@ months: [9]
 weekday: "土"
 next_date: "2026-09-05"
 official_url: "https://hitachi-fes.com"
+image_url: "https://hitachi-fes.com/wp-content/uploads/2024/09/eyecatch_black.jpeg"
 sources:
   - "https://www.ragnet.co.jp/reggae-festival"
   - "https://hitachi-fes.com"

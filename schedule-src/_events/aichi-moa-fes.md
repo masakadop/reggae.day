@@ -11,6 +11,7 @@ months: [9]
 weekday: "日"
 next_date: "2026-09-27"
 official_url: "https://moa-fes.com/"
+image_url: "https://moa-fes.com/wp-content/uploads/2026/05/moafes_2026_ogp.jpg"
 sources:
   - "https://www.ragnet.co.jp/reggae-festival"
   - "https://moa-fes.com/"

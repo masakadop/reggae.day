@@ -11,6 +11,7 @@ months: [10]
 weekday: "日"
 next_date: "2026-10-25"
 official_url: "https://lionfes.com/"
+image_url: "https://lionfes.com/wp-content/themes/lionfes/img/common/ogp02.jpg?ver=20250912"
 sources:
   - "https://www.ragnet.co.jp/reggae-festival"
   - "https://lionfes.com/"

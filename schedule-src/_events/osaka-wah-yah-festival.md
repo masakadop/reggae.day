@@ -11,6 +11,7 @@ months: [9]
 weekday: "日"
 next_date: "2026-09-20"
 official_url: "https://reallifemusic.co.jp/wah-yah-festival-dx/"
+image_url: "https://reallifemusic.co.jp/wp-content/uploads/2025/05/reallife_logo.jpg"
 sources:
   - "https://www.ragnet.co.jp/reggae-festival"
   - "https://reallifemusic.co.jp/wah-yah-festival-dx/"
