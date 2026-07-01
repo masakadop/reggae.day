@@ -7,13 +7,13 @@
 
 ## サイト全体（インフラ）進捗
 
-- [ ] `_layouts/venue.html` にOGP/Twitter Card追加
-- [ ] `_layouts/event.html` にOGP/Twitter Card追加（過去開催履歴セクション含む）
-- [ ] `_includes/jsonld-venue.html` に `image` 追加
-- [ ] `_includes/jsonld-event.html` に `image` 追加
-- [ ] ローカルビルド確認
-- [ ] GitHub Actions成功確認
-- [ ] ライブサイトでのカード表示・タグ検証（第三者クローラー等）
+- [x] `_layouts/venue.html` にOGP/Twitter Card追加
+- [x] `_layouts/event.html` にOGP/Twitter Card追加（過去開催履歴セクション含む）
+- [x] `_includes/jsonld-venue.html` に `image` 追加
+- [x] `_includes/jsonld-event.html` に `image` 追加
+- [x] ローカルビルド確認（警告なし）
+- [x] GitHub Actions成功確認（継続success）
+- [ ] ライブサイトでのカード表示・タグ検証（第三者クローラー等）※マージ後に実施
 - [ ] 全項目完了後、PLAN.md / PROGRESS.md 削除コミット（FACTCHECK.mdは残す）
 
 ## イベント別 進捗（57件）
