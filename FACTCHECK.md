@@ -52,11 +52,82 @@ curl -sS -o /dev/null --max-time 15 -A "<Chrome UA>" -w "%{http_code} %{content_
 上記3件は `image_url` を設定せず、サイト共通画像 `https://reggae.day/og-card.jpg` に
 フォールバックする（テンプレート側の `default` フィルタにより自動処理）。
 
+### 追加調査（サブエージェントによるWeb調査、2026-07-01実施）分の画像URL検証
+
+| slug | 画像URL | 検証結果 | 判定 |
+|---|---|---|---|
+| chiba-jouvert-in-japan | https://static.wixstatic.com/media/4f46bb_.../4f46bb_...png | 200 image/png | 確認済み（ただし2019年版の画像である可能性あり、要留意） |
+| chiba-yachirock-movement | https://yachirock.com/img/title.jpg | 200 image/jpeg | 確認済み |
+| fukuoka-irie-music-with-jim-beam-summer-fes | https://lovefm.co.jp/jbsf/assets/img/2025.jpg | 200 image/jpeg | 確認済み |
+| ishikawa-one-peace-ishikawa | https://www.redsun-knzw.com/cms/.../ONE-PEACE-ISHIKAWA.jpg | 200 image/jpeg | 確認済み |
+| kanagawa-yokosuka-reggae-bash | https://yokosukareggaebash.com/img/ogp.png | 200 image/png | 確認済み（公式ドメインは`.com`と`.site`の2つが存在。`official_url`はフェーズ1で検証済みの`.site`を維持し、画像は`og:image`が確認できた`.com`のものを採用） |
+| osaka-highest-mountain | https://graph.facebook.com/highestmountain.jp/picture?type=large | 200 image/jpeg（302経由でFacebook CDNへリダイレクト） | 確認済み。Facebook Graph APIのプロフィール画像エンドポイントは恒久的に有効なため、署名付きCDN URLではなくこのエンドポイントURL自体を採用 |
+| shiga-irie-run-festival | https://takashima.city/wp-content/.../dl_img_001_...png | 200 image/png | 確認済み（高島市公式サイト掲載のチラシ画像） |
+| tokyo-reggae-super-power | https://seata.jp/img/origin/2171334-S__32956493_0png.png | 200 image/png | 確認済み（会場・吉祥寺CLUB SEATA公式サイト掲載画像） |
+| tokyo-the-do-over-tokyo | https://thedoover-jpn.net/wp/wp-content/.../DoTokyo2026_main.jpg | 200 image/jpeg | 確認済み |
+| wakayama-yardman-vibes | https://www.jah-works.com/8-2019.04.jpg | 200 image/jpeg | 確認済み（主催JAH WORKS公式サイト内画像。イベント専用画像か断定はできないが、同一団体・同一テーマの画像であり誤りではない） |
+
+### 検証したが不採用（不安定・信頼性の懸念により見送り）
+
+| slug | 候補URL | 理由 |
+|---|---|---|
+| mie-2525-music-fes | Instagram CDN経由の署名付きURL | HTTP 200を確認したが、Instagram CDNの署名付きURLは期限切れで将来アクセス不能になる可能性が高いため不採用。サイト共通画像にフォールバック |
+
 ---
 
 ## 主催団体・過去開催履歴の検証ログ
 
-（このセクションは今後の調査結果をもとに随時追記する）
+2026-07-01、サブエージェントによるWeb検索・公式サイト・SNS調査で40イベント分の
+主催団体・過去開催履歴を調査。断定できない項目はすべて「不明」として不採用とし、
+front matterには記載していない（`organizer_name`等のフィールド自体を設定しない）。
+
+採用した主催団体・過去開催履歴は、各イベントのfront matter (`organizer_name`,
+`organizer_url`, `organizer_sns`, `past_events`) および `sources` に情報源URLとともに
+記載済み。個別の情報源URLは各イベントの `.md` ファイルを参照。
+
+### 要注意（矛盾・未確定の可能性がある情報）
+
+- **kyoto-energy-camp / nara-energy-dance**: 開催頻度説明文に「2026年で20周年」と
+  記載しているが、これは元情報源（REGGAE LIFE「全国のレゲエイベント」）の
+  イベント副題「-sound energy 20th anniversary year-」をそのまま引用したもの
+  （出典: https://reggaelife.jp/calendar/events.pl/area/0/）。追加のサブエージェント調査では、
+  「SOUND ENERGY」の活動記録は2010年の開催情報が最古参照であり、周年表記との
+  整合性を独立に裏付ける情報源は見つからなかった。虚偽の可能性は低いと考えられるが
+  （イベント主催者自身が公表した副題であるため）、複数情報源による相互確認はできて
+  いない点に留意。
+- **kagoshima-both-wings**: 元情報源（REGGAE LIFE）には「鹿児島市中町1-2 ニュー中町ビル」
+  「TEL: 099-227-7400」という具体的な住所・電話番号（099は鹿児島の市外局番）が
+  記載されており、実在する鹿児島の会場・イベントである可能性が高い。
+  一方、サブエージェント調査では「TRENCH TOWN」という名称が大阪のサウンドクルー
+  「BAGDAD CAFE THE trench town」（MEETS THE REGGAE主催）と類似しており、
+  独立した裏付け情報は見つけられなかった。「Trench Town」はジャマイカ・キングストンの
+  地名に由来し、レゲエ文化圏で会場名やクルー名として世界的に広く使われる語であるため、
+  大阪の団体と無関係に鹿児島に同名の会場が存在する可能性は十分にある。
+  現時点では元情報源の具体的な住所・電話番号を優先し、データはそのまま維持している。
+- **wakayama-yardman-vibes**: 採用した画像はJAH WORKS公式サイト内の2019年頃の
+  ページに掲載されている画像であり、2026年開催回専用の画像である保証はない。
+  同一主催団体・同一テーマの画像として採用。
+
+### 調査したが情報を確認できなかった項目（不採用・記載なし）
+
+以下は、公式サイト・SNS・Web検索を複数回試みたが、画像・主催団体・過去開催履歴の
+いずれも確認できる情報源を発見できなかったイベント。front matterには該当フィールドを
+追加しておらず、捏造は行っていない。
+
+- **ehime-uwajima-up**（UWAJIMA UP、愛媛県）: 情報が非常に少ないローカルイベント。
+  主催団体・過去開催履歴とも不明。
+- **fukui-liberty-jam**（LIBERTY JAM、福井県）: 検索では無関係なイベントのみヒット。
+  主催団体・過去開催履歴とも不明。
+- **gifu-afrobeats-reggae-sounds-festival**（岐阜県）: 該当情報を発見できず。
+  海外の同名イベントのみヒット。
+- **okinawa-reggae-lounge**（REGGAE LOUNGE、沖縄県）: 会場「ダンスホール酒場サンキュー」の
+  SNSは確認できたが、イベント固有の主催団体・過去開催履歴は確認できず。
+- **nagasaki-vibes-weekend**（Vibes Weekend、長崎県）: 「VIBES GROUP」というアカウント名の
+  存在のみ確認。イベント固有の主催団体・過去開催履歴は確認できず。
+- **gifu-afrobeats-reggae-sounds-festival, aichi-zumzum-kitchencar-fes以外の一部イベント**
+  についても、画像URLのみ確認でき主催団体・履歴が不明なもの、逆に主催団体は判明したが
+  画像・履歴が不明なものが複数ある。詳細は各イベントのfront matterに反映済みの
+  フィールドの有無で判別できる（未設定フィールド＝未確認）。
 
 ---
 
