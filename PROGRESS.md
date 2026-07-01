@@ -13,8 +13,8 @@
 - [x] `_includes/jsonld-event.html` に `image` 追加
 - [x] ローカルビルド確認（警告なし）
 - [x] GitHub Actions成功確認（継続success）
-- [ ] ライブサイトでのカード表示・タグ検証（第三者クローラー等）※マージ後に実施
-- [ ] 全項目完了後、PLAN.md / PROGRESS.md 削除コミット（FACTCHECK.mdは残す）
+- [x] ライブサイトでのカード表示・タグ検証（第三者クローラー Microlink で画像解決・JSON-LD構文を確認、フォールバックも正常動作を確認）
+- [x] 全項目完了後、PLAN.md / PROGRESS.md 削除コミット（FACTCHECK.mdは残す）
 
 ## イベント別 進捗（57件）
 
