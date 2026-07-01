@@ -11,6 +11,7 @@ months: [8]
 weekday: "日"
 next_date: "2026-08-30"
 official_url: "https://harimania.com/event/one-love-kakogawa/"
+image_url: "https://harimania.com/wp-content/uploads/2026/06/cropped-cropped-logo6.png"
 sources:
   - "https://www.ragnet.co.jp/reggae-festival"
   - "https://harimania.com/event/one-love-kakogawa/"

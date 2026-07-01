@@ -11,6 +11,7 @@ months: [11]
 weekday: "火"
 next_date: "2026-11-03"
 official_url: "https://rootsfes.official.ec/"
+image_url: "https://static.thebase.in/img/shop/ogp.png"
 sources:
   - "https://www.ragnet.co.jp/reggae-festival"
   - "https://rootsfes.official.ec/"

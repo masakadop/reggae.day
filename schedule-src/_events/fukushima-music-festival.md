@@ -11,6 +11,7 @@ months: [7]
 weekday: "月"
 next_date: "2026-07-20"
 official_url: "https://shingjidai.com/"
+image_url: "https://shingjidai.com/wp-content/uploads/2026/03/ogp.jpg"
 sources:
   - "https://www.ragnet.co.jp/reggae-festival"
   - "https://shingjidai.com/"

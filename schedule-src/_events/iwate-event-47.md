@@ -11,6 +11,7 @@ months: [3]
 weekday: "金"
 next_date: "2026-03-20"
 official_url: "https://oshu.mypl.net/article/jamaica-fes_oshu"
+image_url: "https://img2.mypl.net/image.php?id=1f6db352f68ba6129a58c30ea6fb69acaef070a0_cms_image.jpg&p=s3-img-origin02&s=1000_1000&op="
 sources:
   - "https://www.ragnet.co.jp/reggae-festival"
   - "https://oshu.mypl.net/article/jamaica-fes_oshu"

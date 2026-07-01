@@ -11,6 +11,7 @@ months: [5]
 weekday: "日"
 next_date: "2026-05-17"
 official_url: "https://www.nikko-kankou.org/notices/280"
+image_url: "https://www.nikko-kankou.org/images/ogp.png"
 sources:
   - "https://www.ragnet.co.jp/reggae-festival"
   - "https://www.nikko-kankou.org/notices/280"

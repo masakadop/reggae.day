@@ -11,6 +11,7 @@ months: [8]
 weekday: "日"
 next_date: "2026-08-30"
 official_url: "https://www.oka.town/events/21537/"
+image_url: "https://www.oka.town/wp-content/uploads/2026/05/img_4985_720.jpg"
 sources:
   - "https://www.ragnet.co.jp/reggae-festival"
   - "https://www.oka.town/events/21537/"
