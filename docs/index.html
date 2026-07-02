@@ -2,6 +2,23 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<script>
+  // Detect the visitor's preferred language as early as possible (before CSS/paint)
+  // so there is no flash of the wrong language. Default (no script / undetected)
+  // stays Japanese, which matches this site's primary audience.
+  (function () {
+    try {
+      var langs = (navigator.languages && navigator.languages.length)
+        ? navigator.languages
+        : [navigator.language || navigator.userLanguage || ''];
+      var isJapanese = langs.some(function (l) { return /^ja\b/i.test(l); });
+      if (!isJapanese) {
+        document.documentElement.classList.add('lang-en');
+        document.documentElement.lang = 'en';
+      }
+    } catch (e) {}
+  })();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>International Reggae Day Countdown — reggae.day</title>
 <meta name="description" content="次のインターナショナル・レゲエ・デイ（毎年7月1日）までのカウントダウン。世界中でレゲエを祝う日まであと何日？">
@@ -137,6 +154,12 @@
   }
   footer a { color: var(--gold); text-decoration: none; }
   footer a:hover { text-decoration: underline; }
+
+  /* Bilingual content: default (no JS / undetected) shows Japanese.
+     html.lang-en (added by the early detection script) shows English instead. */
+  [data-lang] { display: none; }
+  html:not(.lang-en) [data-lang="ja"] { display: revert; }
+  html.lang-en [data-lang="en"] { display: revert; }
 </style>
 </head>
 <body>
@@ -144,11 +167,20 @@
   <div class="stripes bottom"></div>
 
   <h1>International<br>Reggae Day</h1>
-  <p class="subtitle">毎年 7月1日 — 世界中でレゲエを祝う日 🎶</p>
+  <p class="subtitle">
+    <span data-lang="ja">毎年 7月1日 — 世界中でレゲエを祝う日 🎶</span>
+    <span data-lang="en">Every year on July 1 — a day to celebrate reggae music worldwide 🎶</span>
+  </p>
 
-  <p class="target-date">次回は <strong id="targetDate">—</strong></p>
+  <p class="target-date">
+    <span data-lang="ja">次回は</span><span data-lang="en">Next up:</span>
+    <strong id="targetDate">—</strong>
+  </p>
 
-  <div class="celebrate" id="celebrate">🇯🇲 One Love! 今日はレゲエ・デイ！ 🎉</div>
+  <div class="celebrate" id="celebrate">
+    <span data-lang="ja">🇯🇲 One Love! 今日はレゲエ・デイ！ 🎉</span>
+    <span data-lang="en">🇯🇲 One Love! Today is Reggae Day! 🎉</span>
+  </div>
 
   <div class="countdown" id="countdown" role="timer" aria-live="polite">
     <div class="unit"><div class="value" id="days">--</div><div class="label">Days</div></div>
@@ -158,7 +190,9 @@
   </div>
 
   <footer>
-    <a href="https://reggae.day">reggae.day</a> · International Reggae Day は 1994年にジャマイカで始まりました。
+    <a href="https://reggae.day">reggae.day</a> ·
+    <span data-lang="ja">International Reggae Day は 1994年にジャマイカで始まりました。</span>
+    <span data-lang="en">International Reggae Day began in Jamaica in 1994.</span>
   </footer>
 
 <script>
@@ -178,7 +212,8 @@
     return target;
   }
 
-  const dateFmt = new Intl.DateTimeFormat('ja-JP', {
+  const isJapanese = !document.documentElement.classList.contains('lang-en');
+  const dateFmt = new Intl.DateTimeFormat(isJapanese ? 'ja-JP' : 'en-US', {
     year: 'numeric', month: 'long', day: 'numeric', weekday: 'long'
   });
 
@@ -201,7 +236,7 @@
     if (isToday) {
       el.celebrate.style.display = 'block';
       el.countdown.style.display = 'none';
-      el.target.textContent = dateFmt.format(now) + '（今日！）';
+      el.target.textContent = dateFmt.format(now) + (isJapanese ? '（今日！）' : ' (Today!)');
       return;
     }
 
