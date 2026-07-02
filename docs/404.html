@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<script>
+  // Detect the visitor's preferred language as early as possible (before CSS/paint)
+  // so there is no flash of the wrong language. Default (no script / undetected)
+  // stays Japanese, which matches this site's primary audience.
+  (function () {
+    try {
+      var langs = (navigator.languages && navigator.languages.length)
+        ? navigator.languages
+        : [navigator.language || navigator.userLanguage || ''];
+      var isJapanese = langs.some(function (l) { return /^ja\b/i.test(l); });
+      if (!isJapanese) {
+        document.documentElement.classList.add('lang-en');
+        document.documentElement.lang = 'en';
+      }
+    } catch (e) {}
+  })();
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>404 Not Found — reggae.day</title>
+<meta name="description" content="お探しのページは見つかりませんでした。 / The page you're looking for could not be found.">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='33' y='0' fill='%23009b3a'/%3E%3Crect width='100' height='34' y='33' fill='%23fed100'/%3E%3Crect width='100' height='33' y='67' fill='%23ce1126'/%3E%3C/svg%3E">
+<style>
+  :root {
+    --green: #009b3a;
+    --gold:  #fed100;
+    --red:   #ce1126;
+    --ink:   #1a1208;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    font-family: "Helvetica Neue", Helvetica, Arial, "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+    color: #fff8e7;
+    background: var(--ink);
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem 1rem;
+    overflow-x: hidden;
+    position: relative;
+  }
+  /* Rasta stripe band across the top */
+  .stripes {
+    position: fixed;
+    inset: 0 0 auto 0;
+    height: 10px;
+    background: linear-gradient(90deg,
+      var(--green) 0 33.33%,
+      var(--gold)  33.33% 66.66%,
+      var(--red)   66.66% 100%);
+    background-size: 300% 100%;
+    animation: slide 6s linear infinite;
+    z-index: 10;
+  }
+  .stripes.bottom { inset: auto 0 0 0; }
+  @keyframes slide { to { background-position: 300% 0; } }
+
+  .code {
+    font-size: clamp(4rem, 18vw, 8rem);
+    line-height: 1;
+    letter-spacing: 0.02em;
+    margin-bottom: 0.6rem;
+    background: linear-gradient(90deg, var(--green), var(--gold), var(--red));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 800;
+  }
+  h1 {
+    font-size: clamp(1.3rem, 4vw, 2rem);
+    margin-bottom: 0.6rem;
+    color: #fff8e7;
+    font-weight: 800;
+  }
+  .subtitle {
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+    color: #d9cdb0;
+    margin-bottom: 2.2rem;
+    max-width: 32rem;
+  }
+
+  .home-link {
+    display: inline-block;
+    padding: 0.8rem 1.8rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(254, 209, 0, 0.4);
+    color: var(--gold);
+    text-decoration: none;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    transition: background 0.15s ease;
+  }
+  .home-link:hover { background: rgba(254, 209, 0, 0.12); }
+
+  footer {
+    margin-top: 2.5rem;
+    font-size: 0.8rem;
+    color: #8a7f66;
+  }
+  footer a { color: var(--gold); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  /* Bilingual content: default (no JS / undetected) shows Japanese.
+     html.lang-en (added by the early detection script) shows English instead. */
+  [data-lang] { display: none; }
+  html:not(.lang-en) [data-lang="ja"] { display: revert; }
+  html.lang-en [data-lang="en"] { display: revert; }
+</style>
+</head>
+<body>
+  <div class="stripes"></div>
+  <div class="stripes bottom"></div>
+
+  <div class="code">404</div>
+  <h1>
+    <span data-lang="ja">ページが見つかりません</span>
+    <span data-lang="en">Page Not Found</span>
+  </h1>
+  <p class="subtitle">
+    <span data-lang="ja">お探しのページは移動または削除されたか、URLが間違っている可能性があります。</span>
+    <span data-lang="en">The page you're looking for may have been moved, removed, or the URL may be incorrect.</span>
+  </p>
+
+  <a class="home-link" href="https://reggae.day/">
+    <span data-lang="ja">トップページへ戻る</span>
+    <span data-lang="en">Back to Home</span>
+  </a>
+
+  <footer>
+    <a href="https://reggae.day">reggae.day</a> ·
+    <span data-lang="ja">International Reggae Day は 1994年にジャマイカで始まりました。</span>
+    <span data-lang="en">International Reggae Day began in Jamaica in 1994.</span>
+  </footer>
+</body>
+</html>
